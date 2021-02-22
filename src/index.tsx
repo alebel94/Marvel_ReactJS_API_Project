@@ -1,12 +1,62 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { render } from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+import { Home, CreateCharacter } from './components';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Navbar, Nav} from 'react-bootstrap';
+import logo from './assets/img/marvel_logo.png';
+import './styles.css'
 
-ReactDOM.render(
+import{
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+}
+from 'react-router-dom';
+
+render(
   <React.StrictMode>
-    <App />
+		<Router>
+    <Navbar bg='dark' variant='dark'>
+        <Navbar.Brand>
+          <img
+            alt="Coding Drone Members"
+            src={logo}
+            width="100"
+            className="d-inline-block align-top"
+          />{' '}
+					<Link to="/">Marvel Characters API</Link>
+        </Navbar.Brand>
+			{/* Nav Items to the right  */}
+      <Nav className="move-nav" activeKey="/">
+        
+				<Nav.Item>
+				{/* Item is a child component of Nav */}
+          <Nav.Link>
+            <Link to='/'> Home </Link>
+          </Nav.Link>
+        </Nav.Item>
+
+				<Nav.Item>
+          <Nav.Link>
+            <Link to='/create'> Create a Character </Link>
+          </Nav.Link>
+        </Nav.Item>
+      
+			</Nav>
+
+      </Navbar>
+			<Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/create">
+          <CreateCharacter />
+        </Route>
+      </Switch>
+
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
